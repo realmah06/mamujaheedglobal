@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+  <!-- SweetAlert2 CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <title>Dashboard</title>
+</head>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    font-family: "Roboto", serif;
+  }
+  /*
+  .header1 {
+    padding: 7px;
+    background: green;
+    width: 100%;
+    top: 0;
+    position: relative;
+  }
+
+  .header1 input {
+    padding: 7px;
+    border: 1px solid #ddd;
+    width: 500px;
+    border-radius: 0.5rem;
+    font-size: 18px;
+    outline: none;
+  }
+*/
+  .header2 {
+    padding: 20px;
+    background-color: white;
+    border-bottom: 1px solid #ddd;
+    top: 0;
+    position: fixed;
+    width: 100%;
+  }
+  .header2 ul li {
+    display: inline-flex;
+    margin-inline-start: 20px;
+    padding: 7px;
+    align-items: center;
+  }
+  .header2 ul li a {
+    text-decoration: none;
+    color: #000;
+    cursor: pointer;
+    align-items: center;
+    font-size: 18px;
+  }
+  .summaries{
+    width: 100;
+  }
+  .summaries h2{
+    font-size: 22px;
+    color: darkred;
+    margin: 10px;
+  }
+  .row1{
+    margin: 10px;
+  }
+  .row1 .box{
+    display: inline-block;
+    width: 30%;
+    margin: 10px;
+    text-align: center;
+  }
+  .row1 .box .box-content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+   .box span{
+    font-size: 40px;
+    margin: 5px;
+  }
+  .row1 .box .box-content p{
+    font-weight: bold;
+    margin: 5px;
+    color: green;
+    font-size: 20px;
+    font-style: italic;
+  }
+  .row2{
+    margin: 10px;
+  }
+  .row2 .box{
+    display: inline-block;
+    width: 30%;
+    margin: 10px;
+    text-align: center;
+  }
+  .row2 .box p{
+    font-size: 22px;
+    font-weight: bold;
+  }
+  .show{
+    display: none;
+    padding: 5px;
+    font-size: 40px;
+    margin: 5px;
+  }
+  .show span{
+    font-size: 40px;
+  }
+  .hide{
+    display: none;
+    padding: 5px;
+    font-size: 40px;
+    margin: 5px;
+  }
+  .hide span{
+    font-size: 40px;
+  }
+  @media screen and (max-width: 1200px){
+    .header2{
+      display: none;
+      top: 45px;
+      position: relative;
+      width: 95.5%;
+    }
+    .header2 ul li{
+      display: block;
+      width: 88%;
+      border: 2px solid #ddd;
+      padding: 10px;
+    }
+    .show{
+      display: block;
+    }
+    .row1 .box{
+      display: block;
+      padding: 20px;
+      width: 90%;
+    }
+    .row2 .box{
+      display: block;
+      padding: 20px;
+      width: 90%;
+    }
+    
+  }
+</style>
+<body>
+  <!--
+  <div class="header1">
+    <input type="search" name="search" id="search" placeholder="Search anything..."> 
+  </div> -->
+  <div class="show" id="show">
+    <span class="material-symbols-outlined">list</span>
+  </div>
+  <div class="hide" id="hide">
+    <span class="material-symbols-outlined">block</span>
+  </div>
+  <div class="header2" id="header2">
+    <ul>
+      <li class="active"><a href="dashboard.html">Dashboard</a></li>
+      <li><a href="balances.html">General Balances</a></li>
+      <li><a href="investment.html">Investment Analysis</a></li>
+      <li><a href="account.html">Account Management</a></li>
+      <li><a href="supply.html">Supply Department</a></li>
+      <li><a href="delivery.html">Delivery Department</a></li>
+      <li><a href="report.html">Report</a></li>
+      <li><a href="index.html">Logout</a></li>
+    </ul>
+  </div>
+  <br /><br /><br /><br /><br /><br />
+  <div class="summaries">
+    <h2>Annual Transactions Summary Between 01-January-2025.</h2>
+    <br />
+    <div class="row1">
+      <div class="box">
+        <h3>Goods Ordered</h3>
+        <div class="box-content">
+          <span class="material-symbols-outlined">box_add</span>
+          <p>0 bags</p>
+        </div>
+      </div>
+      <div class="box">
+        <h3>Total Sold Out</h3>
+        <div class="box-content">
+          <span class="material-symbols-outlined">shopping_cart</span>
+         <p>0 bags</p>
+        </div>
+      </div>
+        <div class="box">
+          <h3>Cumulative Products</h3>
+          <div class="box-content">
+            <span class="material-symbols-outlined">storefront</span>
+            <p>0 bags</p>
+          </div>
+        </div>
+    </div>
+    <br />
+    <div class="row2">
+      <div class="box">
+        <h3>Total Bank In</h3>
+        <span class="material-symbols-outlined">download</span>
+        <p>₦0.00</p>
+      </div>
+          <div class="box">
+        <h3>Total Bank Out</h3>
+        <span class="material-symbols-outlined">upload</span>
+        <p>₦0.00</p>
+      </div>
+          <div class="box">
+      <h3>MARGIN</h3>
+      <span class="material-symbols-outlined">dynamic_form</span>
+      <p>₦0.00</p>
+    </div>
+    </div>
+  </div>
+  <script>
+    var header = document.getElementById("header2");
+    var show = document.getElementById("show");
+    var hide = document.getElementById("hide");
+    
+    show.onclick = function(){
+      header.style.display = "block";
+      hide.style.display = "block";
+      show.style.display = "none";
+    }
+    hide.onclick = function(){
+      header.style.display = "none";
+      hide.style.display = "none";
+      show.style.display = "block";
+    }
+  </script>
+</body>
+</html>
