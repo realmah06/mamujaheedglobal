@@ -75,7 +75,7 @@
     }
     .other-side{
       width: 400px;
-      /* background: #F70909BA; */
+      background: #F70909BA;
       padding: 10px;
       color: white ;
       height: 38vh;
@@ -83,6 +83,10 @@
       justify-content: center;
       align-items: center;
       color: 
+    }
+    .alerted{
+      font-size: 25px;
+      font-weight: 500;
     }
     @media screen and (max-width: 1000px){
       .other-side{
@@ -117,7 +121,7 @@
         </form>
       </div>
       <div class="other-side">
-        <img src="logo.jpg" height="300">
+        <h1>Welcome to Login</h1>
       </div>
       </div>
       <script>
@@ -130,7 +134,7 @@
   // Show confirmation prompt before checking credentials
   Swal.fire({
     icon: "warning",
-    title: "Are you sure?",
+    html: `<p class="alerted">Login to App?</p>`,
     showConfirmButton: true,
     confirmButtonText: "Yes, Proceed",
     showCancelButton: true,
@@ -143,10 +147,10 @@
       if (username === "Mahadi" && password === "admin") {
         Swal.fire({
           icon: "success",
-          title: "Login Successful",
+          html: `<p class="alerted">Login Successfully...</p>`,
           text: "Redirecting to dashboard...",
-          timer: 2000,
-          showConfirmButton: false
+          timer: 3000,
+          showConfirmButton: true,
         }).then(() => {
           window.location.href = "dashboard.html"; // Redirect after success
         });
