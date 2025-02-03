@@ -300,6 +300,10 @@
     height: 26vh;
     width: 700px;
   }
+  .alerte{
+    font-weight: 500;
+    font-size: 25px;
+    font-family: cursive;
   }
   @media screen and (max-width: 1000px){
     .popup-box{
@@ -448,50 +452,51 @@
   
     <!-- Popup Overlay -->
     <div class="popup-overlay" id="popup">
-        <div class="popup-box">
-            <span class="close-btn" onclick="closePopup()">×</span>
-            <h2>Collect from Supplier</h2>
-            <hr />
-            <br /><br />
-            <form id="collect_from_supplier">
-              <div class="form-group">
-                <label for="Date">Date</label>
+    <div class="popup-box">
+        <span class="close-btn" onclick="closePopup()">×</span>
+        <h2>Collect from Supplier</h2>
+        <hr />
+        <br /><br />
+        <form id="collect_from_supplier">
+            <div class="form-group">
+                <label for="date">Date</label>
                 <input type="date" name="date" id="date" />
-              </div>
-              <div class="form-group">
-                <label for="Supplier">House Supplier</label>
+            </div>
+            <div class="form-group">
+                <label for="supplier">House Supplier</label>
                 <select name="supplier" id="supplier">
-                  <option selected> -- Select House Supplier -- </option>
+                    <option selected> -- Select House Supplier -- </option>
                 </select>
-              </div>
-              <div class="form-group">
-                <label for="Location">Location</label>
+            </div>
+            <div class="form-group">
+                <label for="location">Location</label>
                 <input type="text" name="location" id="location" placeholder="Goods Location"/>
-              </div>
-              <div class="form-group">
-                <label for="Quantity">Quantity</label>
+            </div>
+            <div class="form-group">
+                <label for="quantity">Quantity</label>
                 <input type="number" name="quantity" id="quantity" placeholder="Bags" />
-              </div>
-              <div class="form-group">
-                <label for="Weight">Weight</label>
+            </div>
+            <div class="form-group">
+                <label for="weight">Weight</label>
                 <input type="number" name="weight" id="weight" placeholder="Kg" />
-                </div>
-                <div class="form-group">
-                  <label for="Cost Price">Cost Price</label>
-                  <input type="number" name="price" id="price" placeholder="Cost Price" />
-                </div>
-                <div class="form-group">
-                  <label for="Expenses">Expenses</label>
-                  <input type="number" name="expenses" id="expenses" placeholder="Expenses" />
-                </div>
-                <br /><br />
-                <hr />
-                  <button class="btn save" type="submit">Submit</button>
-                  <button class="btn discard" type="submit">Discard</button>
-                  <br /><br />
-            </form>
-        </div>
+            </div>
+            <div class="form-group">
+                <label for="price">Cost Price</label>
+                <input type="number" name="price" id="price" placeholder="Cost Price" />
+            </div>
+            <div class="form-group">
+                <label for="expenses">Expenses</label>
+                <input type="number" name="expenses" id="expenses" placeholder="Expenses" />
+            </div>
+            <br /><br />
+            <hr />
+            <button class="btn save" type="submit">Submit</button>
+            <button class="btn discard" type="reset">Reset</button>
+            <br /><br />
+        </form>
     </div>
+</div>
+
   <script>
     function switchTab(tabName) {
     // Remove active class from all tabs
@@ -512,23 +517,65 @@
 }
 
 const popup = document.getElementById("popup");
-        const triggerBtn = document.querySelector(".trigger-btn");
+const triggerBtn = document.querySelector(".trigger-btn");
+const popupBox = document.querySelector(".popup-box");
 
-        triggerBtn.addEventListener("click", function (event) {
-            event.preventDefault();
-            popup.classList.add("active");
-        });
+triggerBtn.addEventListener("click", function (event) {
+    event.preventDefault();
+    popup.classList.add("active");
+});
 
-        function closePopup() {
-            popup.classList.remove("active");
+function closePopup() {
+    popup.classList.remove("active");
+}
+
+// Close when clicking outside the popup content
+popup.addEventListener("click", function (event) {
+    if (!popupBox.contains(event.target)) {
+        closePopup();
+    }
+});
+
+// Handle form submission with SweetAlert confirmation
+document.getElementById("collect_from_supplier").addEventListener("submit", function(event) {
+    event.preventDefault(); // Prevent form from submitting immediately
+
+    Swal.fire({
+        icon: "question",
+        html: `<p class="alerte" style="font-weight: bold; font-size: 30px; font-family: cursive;">Collect from House Supplier?</p>`,
+        showCancelButton: true,
+        cancelButtonText: "No, Discard",
+        cancelButtonColor: "red",
+        confirmButtonText: "Yes, Collect",
+        confirmButtonColor: "#123475"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            Swal.fire({
+              html: `<p class="alerte" style="font-weight: bold; font-size: 30px; font-family: cursive;">Collecting from House Supplier...</p>`,
+              allowOutsideClick: false,
+              didOpen: () => {
+                Swal.showLoading();
+              }
+            });
+
+          setTimeout(() => {
+  Swal.fire({
+    icon: 'success',
+    html: `<p class="alerte" style="font-weight: bold; font-size: 30px; font-family: cursive;">Collected From House Supplier.</p>`,
+    text: 'Operation completed successfully',
+  });
+}, 3000);
+
+
+            // Close the popup after confirmation
+          //  closePopup();
+            
+            // Optionally, reset the form after submission
+          //  document.getElementById("collect_from_supplier").reset();
         }
+    });
+});
 
-        // Close when clicking outside the box
-        popup.addEventListener("click", function (event) {
-            if (event.target === popup) {
-                closePopup();
-            }
-        });
   </script>
 </body>
 </html>
