@@ -59,7 +59,7 @@
   }
   .row1 .box{
     display: inline-block;
-    width: 30%;
+    width: 29%;
     margin: 10px;
     text-align: center;
   }
@@ -187,12 +187,104 @@
   font-family: cursive;
   color: red;
 }
+.popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: space-evenly;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+        }
+
+        /* Popup box */
+        .popup-box {
+            background: white;
+            padding: 20px;
+            width: 700px;
+            border-radius: 5px;
+            transform: scale(0.8);
+            opacity: 0;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            position: relative;
+            height: 45vh;
+            overflow: scroll;
+            scrollbar-width: none;
+            margin-top: 60px;
+        }
+
+        /* Show popup */
+        .popup-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .popup-overlay.active .popup-box {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        /* Close button */
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+        .popup-box h2{
+          font-size: 22px;
+          font-family: cursive;
+          color: green;
+        }
+        .form-group{
+          display: inline-block;
+          margin: 5px;
+        }
+        .form-group label{
+          display: block;
+          font-size: 18px;
+          color: darkred;
+        }
+        .form-group input{
+          padding: 7px 10px;
+          border: 1px solid #ddd;
+          border-radius: 3px;
+          outline: none;
+          background-color: #fff;
+          font-size: 17px;
+        }
+        .form-group select{
+          padding: 7px 10px;
+          border: 1px solid #ddd;
+          border-radius: 3px;
+          outline: none;
+          font-size: 17px;
+          background-color: #fff;
+        }
+        .btn{
+          float: right;
+          padding: 7px;
+          margin: 7px;
+          width: 100px;
+          border-radius: 3px;
+          border: 1px solid #ddd;
+          font-size: 16px;
+        }
+        .save{
+          background-color: #123475;
+          color: white;
+        }
+        .discard{
+          background-color: #A30D0D;
+          color: white;
+        }
   @media screen and (max-width: 1200px){
-    row1 .box{
-      display: block;
-      padding: 20px;
-      width: 90%;
-    }
+    
     .row{
       display: block;
     }
@@ -204,6 +296,45 @@
   .table-area{
     height: 35vh;
   }
+  .popup-box{
+    height: 26vh;
+    width: 700px;
+  }
+  }
+  @media screen and (max-width: 1000px){
+    .popup-box{
+      height: 40vh;
+    }
+  }
+  @media screen and (max-width: 800px){
+    .form-group{
+      width: 100%
+    }
+    .form-group input{
+      width: 93%;
+    }
+    .form-group select{
+      width: 97%;
+    }
+    .popup-box{
+      height: auto;
+      margin: 30px 80px;
+    }
+    .summaries{
+      margin-top: 50px;
+    }
+    .row1 .box{
+      display: block;
+      padding: 20px;
+      width: 90%;
+    }
+    .tabarea{
+      display: block;
+    }
+    .tabarea .tab{
+      width: 97%;
+      border-bottom: 1px solid #ddd;
+    }
   }
 </style>
 <body>
@@ -212,7 +343,7 @@
   </div>
   <div class="header">
     <ul>
-      <li><a href="#">Collect from Supplier</a></li>
+      <li><a href="#" class="trigger-btn">Collect from Supplier</a></li>
       <li><a href="#">Company Delivery</a></li>
       <li><a href="#">Product Setup</a></li>
     </ul>
@@ -314,6 +445,53 @@
         </div>
     </div>
   </div>
+  
+    <!-- Popup Overlay -->
+    <div class="popup-overlay" id="popup">
+        <div class="popup-box">
+            <span class="close-btn" onclick="closePopup()">×</span>
+            <h2>Collect from Supplier</h2>
+            <hr />
+            <br /><br />
+            <form id="collect_from_supplier">
+              <div class="form-group">
+                <label for="Date">Date</label>
+                <input type="date" name="date" id="date" />
+              </div>
+              <div class="form-group">
+                <label for="Supplier">House Supplier</label>
+                <select name="supplier" id="supplier">
+                  <option selected> -- Select House Supplier -- </option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="Location">Location</label>
+                <input type="text" name="location" id="location" placeholder="Goods Location"/>
+              </div>
+              <div class="form-group">
+                <label for="Quantity">Quantity</label>
+                <input type="number" name="quantity" id="quantity" placeholder="Bags" />
+              </div>
+              <div class="form-group">
+                <label for="Weight">Weight</label>
+                <input type="number" name="weight" id="weight" placeholder="Kg" />
+                </div>
+                <div class="form-group">
+                  <label for="Cost Price">Cost Price</label>
+                  <input type="number" name="price" id="price" placeholder="Cost Price" />
+                </div>
+                <div class="form-group">
+                  <label for="Expenses">Expenses</label>
+                  <input type="number" name="expenses" id="expenses" placeholder="Expenses" />
+                </div>
+                <br /><br />
+                <hr />
+                  <button class="btn save" type="submit">Submit</button>
+                  <button class="btn discard" type="submit">Discard</button>
+                  <br /><br />
+            </form>
+        </div>
+    </div>
   <script>
     function switchTab(tabName) {
     // Remove active class from all tabs
@@ -333,6 +511,24 @@
     document.getElementById(tabName + "-content").classList.add("active-content");
 }
 
+const popup = document.getElementById("popup");
+        const triggerBtn = document.querySelector(".trigger-btn");
+
+        triggerBtn.addEventListener("click", function (event) {
+            event.preventDefault();
+            popup.classList.add("active");
+        });
+
+        function closePopup() {
+            popup.classList.remove("active");
+        }
+
+        // Close when clicking outside the box
+        popup.addEventListener("click", function (event) {
+            if (event.target === popup) {
+                closePopup();
+            }
+        });
   </script>
 </body>
 </html>
