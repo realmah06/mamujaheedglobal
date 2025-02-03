@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+  <!-- SweetAlert2 CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <title></title>
+</head>
+<style>
+   * {
+    margin: 0;
+    padding: 0;
+    font-family: "Roboto", serif;
+  }
+  .head{
+    background-color: #fff;
+    z-index: 1;
+    top: 0;
+    border-bottom: 1px solid #ddd;
+    padding: 10px;
+    position: fixed;
+    width: 100%;
+  }
+  .head a{
+    font-size: 22px;
+    padding: 7px;
+    text-decoration: none;
+    color: black;
+  }
+  .header{
+    padding: 10px;
+    float: right;
+    background-color: #fff;
+    margin-top: 50px;
+  }
+  .header ul li{
+    list-style: none;
+    background-color: #212875;
+    padding: 10px;
+    margin: 5px;
+    font-size: 17px;
+    display: inline-block;
+    border-radius: 5px;
+  }
+  .header ul li a{
+    text-decoration: none;
+    color: #fff;
+  }
+    .row1{
+    margin: 10px;
+  }
+  .row1 .box{
+    display: inline-block;
+    width: 30%;
+    margin: 10px;
+    text-align: center;
+  }
+  .row1 .box .box-content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+   .box span{
+    font-size: 40px;
+    margin: 5px;
+  }
+  .row1 .box .box-content p{
+    font-weight: bold;
+    margin: 5px;
+    color: green;
+    font-size: 20px;
+    font-style: italic;
+  }
+  .contents{
+    border: 1px solid #ddd;
+    width: 100%;
+  }
+  .content h2{
+    color: darkred;
+    font-family: cursive;
+  }
+  .tabarea{
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin: 10px;
+    display: flex;
+    justify-content: space-around;
+  }
+  .tabarea .tab{
+    display: inline-block;
+    width: 26%;
+    text-align: center;
+    padding: 15px;
+    margin: 0;
+    font-size: 20px;
+    transition: background 0.3s ease-in-out;
+    font-family: cursive;
+   
+  }
+  tab.active {
+    background: #007bff;
+    color: white;
+}
+
+.content-container {
+    margin-top: 20px;
+    padding: 20px;
+}
+
+.content {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.content.active-content {
+    display: block;
+    opacity: 1;
+}
+.tab span{
+  font-size: 40px;
+}
+.row{
+  display: flex;
+  justify-content: space-between;
+}
+.row .modal{
+  width: 48%;
+  margin: 5px;
+  
+  padding: 10px;
+  height: 50vh;
+  overflow: scroll;
+}
+.modal p{
+  font-family: cursive;
+  font-weight: bolder;
+  font-size: 25px;
+}
+.modal .modal-header{
+  padding: 7px;
+  display: flex;
+  justify-content: space-between;
+}
+.modal-header input{
+  padding: 7px 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  width: 400px;
+  font-size: 17px;
+}
+.modal-header span{
+  float: right;
+}
+.table-area{
+  width: 100%;
+  height: 60vh;
+  border: 2px solid #ddd;
+  overflow: scroll;
+}
+.table-area .table-header{
+  background-color: #702668;
+  padding: 15px;
+}
+.table-header input{
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  font-size: 17px;
+  outline: none;
+}
+.content h3{
+  font-family: cursive;
+  font-size: 25px;
+}
+.nothing{
+  font-size: 30px;
+  text-align: center;
+  font-family: cursive;
+  color: red;
+}
+  @media screen and (max-width: 1200px){
+    row1 .box{
+      display: block;
+      padding: 20px;
+      width: 90%;
+    }
+    .row{
+      display: block;
+    }
+    .row .modal{
+      width: 96%;
+      margin-bottom: 20px;
+      height: 35vh;
+    }
+  .table-area{
+    height: 35vh;
+  }
+  }
+</style>
+<body>
+  <div class="head">
+    <a href="dashboard.html">⬅️ Go Back</a>
+  </div>
+  <div class="header">
+    <ul>
+      <li><a href="#">Collect from Supplier</a></li>
+      <li><a href="#">Company Delivery</a></li>
+      <li><a href="#">Product Setup</a></li>
+    </ul>
+  </div>
+  <br /><br /><br /><br /><br /><br /><br />
+   <div class="summaries">
+    <br />
+    <div class="row1">
+      <div class="box">
+        <h3>Goods Collected</h3>
+        <div class="box-content">
+          <span class="material-symbols-outlined">box_add</span>
+          <p>0 bags</p>
+        </div>
+      </div>
+      <div class="box">
+        <h3>Goods Delivered</h3>
+        <div class="box-content">
+          <span class="material-symbols-outlined">shopping_cart</span>
+         <p>0 bags</p>
+        </div>
+      </div>
+        <div class="box">
+          <h3>Goods Remaining</h3>
+          <div class="box-content">
+            <span class="material-symbols-outlined">storefront</span>
+            <p>0 bags</p>
+          </div>
+        </div>
+    </div>
+    <br />
+  </div>
+  <br /><br />
+  <div class="contents">
+    <div class="tabarea">
+  <div class="tab active" id="main-tab" onclick="switchTab('main')">
+    <span class="material-symbols-outlined">sync_saved_locally</span>
+    <p>Main Home</p>
+  </div>
+  <div class="tab" id="deliveries-tab" onclick="switchTab('deliveries')">
+    <span class="material-symbols-outlined">local_shipping</span>
+    <p>Delivery Trucks</p>
+  </div>
+  <div class="tab" id="refresh-tab" onclick="window.location.href='delivery.html'">
+    <span class="material-symbols-outlined">restart_alt</span>
+    <p>Refresh</p>
+  </div>
+</div>
+
+<div class="content-container">
+        <div class="content active-content" id="main-content">
+            <h2>House Supplier Balances & Unloaded Goods</h2>
+            <br />
+            <div class="row">
+              <div class="modal">
+                <p>House Supplier Balances</p>
+                <div class="modal-header">
+                <input type="search" placeholder="Search House Supplier">
+                &nbsp;&nbsp;&nbsp; <span class="material-symbols-outlined">sort</span>
+                </div>
+                <hr style="border: 1px solid green;"/>
+              </div>
+              <div class="modal">
+                <p>Unloaded Goods</p>
+                <div class="modal-header">
+                <input type="search" placeholder="Search Unloaded Goods">
+                &nbsp;&nbsp;&nbsp; <span class="material-symbols-outlined">sort</span>
+                </div>
+                <hr style="border: 1px solid green;"/>
+              </div>
+            </div>
+        </div>
+        <div class="content" id="deliveries-content">
+            <h2>Confirmed & Awaiting Confirmation Delivery Trucks.</h2>
+            <br /><br />
+            <h3>Delivery Trucks Awaiting Confirmation</h3>
+            <div class="table-area">
+              <div class="table-header">
+                <input type="search" name="search" id="search" placeholder="Search Delivery"/>
+              </div>
+              <br /><br /><br /><br />
+              <div class="nothing">
+                  No Delivery Truck Awaiting Confirmation Currently 
+              </div>
+            </div>
+            <br />
+            <br /><br />
+            <h3>Confirmed Delivery Trucks</h3>
+            <div class="table-area">
+              <div class="table-header">
+                <input type="search" name="search" id="search" placeholder="Search Delivery"/>
+              </div>
+              <br /><br /><br /><br />
+              <div class="nothing">
+                  No Confirmed Delivery Truck Currently 
+              </div>
+
+            </div>
+        </div>
+    </div>
+  </div>
+  <script>
+    function switchTab(tabName) {
+    // Remove active class from all tabs
+    document.querySelectorAll(".tab").forEach(tab => {
+        tab.classList.remove("active");
+    });
+
+    // Add active class to clicked tab
+    document.getElementById(tabName + "-tab").classList.add("active");
+
+    // Hide all content sections
+    document.querySelectorAll(".content").forEach(content => {
+        content.classList.remove("active-content");
+    });
+
+    // Show selected content section
+    document.getElementById(tabName + "-content").classList.add("active-content");
+}
+
+  </script>
+</body>
+</html>
